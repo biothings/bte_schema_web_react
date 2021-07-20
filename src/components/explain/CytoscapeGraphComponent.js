@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Grid, Icon, Button, Popup } from 'semantic-ui-react';
 
-import {colorSchema, semanticTypeShorthand} from '../shared/semanticTypes';
-import { getPublicationLink } from '../shared/utils';
+import {colorSchema, semanticTypeShorthand} from '../../shared/semanticTypes';
+import { getPublicationLink } from '../../shared/utils';
 
-import cytoscape from '../shared/cytoscapeInit';
+import cytoscape from '../../shared/cytoscapeInit';
 import Tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light-border.css';

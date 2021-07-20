@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
-import { Navigation } from '../../components/Breadcrumb';
-import AccordionComponent from '../../components/AccordionComponent';
-import Steps from '../../components/StepsComponent';
+import { Navigation } from '../Breadcrumb';
+import AccordionComponent from './AccordionComponent';
+import Steps from './StepsComponent';
 import ExplainInput from './ExplainInputComponent';
-import { MetaPathForm } from '../../components/MetaPathFormComponent';
+import { MetaPathForm } from './metapath/MetaPathFormComponent';
 import ExplainQueryResult from './ExplainQueryResultComponent';
 import { getIntermediateNodes, findMetaPath, getFieldOptions, getFilteredResults, getPublicationLink } from '../../shared/utils';
 import query from "@biothings-explorer/explain";

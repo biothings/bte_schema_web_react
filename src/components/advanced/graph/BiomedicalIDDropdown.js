@@ -52,6 +52,7 @@ export default class BiomedicalIDDropdown extends Component {
         search
         selection
         allowAdditions
+        search={(opt, q) => (opt)}
         onSearchChange={this.handleSearchChange}
         onChange={this.handleChange}
         onAddItem={this.handleAddItem}

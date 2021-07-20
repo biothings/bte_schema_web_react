@@ -21,14 +21,6 @@ class Header extends Component {
                     </Menu.Item>
 
                     <Menu.Item
-                        name='PREDICT'
-                        as={NavLink}
-                        exact to='/predict'
-                        >
-                        PREDICT
-                    </Menu.Item>
-
-                    <Menu.Item
                         name='EXPLAIN'
                         as={NavLink}
                         exact to='/explain'

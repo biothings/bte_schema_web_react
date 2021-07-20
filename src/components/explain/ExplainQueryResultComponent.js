@@ -1,8 +1,8 @@
-import BTETable from '../../components/DisplayTableResult';
-import ReactLoader from '../../components/DimmerComponent';
+import BTETable from './DisplayTableResult';
+import ReactLoader from './DimmerComponent';
 import React, { Component } from 'react';
 import { Segment, Divider, Button,  Modal } from 'semantic-ui-react';
-import CytoscapeGraph from '../../components/CytoscapeGraphComponent';
+import CytoscapeGraph from './CytoscapeGraphComponent';
 
 export default class ExplainQueryResult extends Component {
 

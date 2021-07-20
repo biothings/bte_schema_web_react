@@ -14,7 +14,7 @@ const Home = () => (
           <Card.Content textAlign="center">
             <Card.Header>EXPLAIN</Card.Header>
             <Card.Description>
-            EXPLAIN queries are designed to identify plausible reasoning chains to explain the relationship between two entities.
+              EXPLAIN queries are designed to identify plausible reasoning chains to explain the relationship between two entities.
             </Card.Description>
           </Card.Content>
           <Card.Content extra textAlign="center">
@@ -23,33 +23,19 @@ const Home = () => (
         </Card>
       </Grid.Column>
       <Grid.Column>
-        <Card centered color="green" className="homeCard" as={Link} to='/predict'>
-          <Image src={predict} />
-          <Card.Content textAlign="center">
-            <Card.Header>PREDICT</Card.Header>
-            <Card.Description>
-            PREDICT queries are designed to predict plausible relationships between one entity and an entity class, such as Gene.
-            </Card.Description>
-          </Card.Content>
-          <Card.Content extra textAlign="center">
-            <Button>Try it Out</Button>
-          </Card.Content>
-        </Card>
-      </Grid.Column>
-      {/* <Grid.Column>
         <Card centered href="/explorer/advanced" color="purple" className="homeCard">
           <Image src={predict} />
           <Card.Content textAlign="center">
             <Card.Header>ADVANCED</Card.Header>
             <Card.Description>
-            Make an advanced Query
+              Use the advanced query builder to query BTE or ARS. Currently, predict queries are supported (explain queries coming soon). 
             </Card.Description>
           </Card.Content>
           <Card.Content extra textAlign="center">
             <Link to='/advanced'><Button>Try it Out</Button></Link>
           </Card.Content>
         </Card>
-      </Grid.Column> */}
+      </Grid.Column>
     </Grid>
   </Segment>
   </div>

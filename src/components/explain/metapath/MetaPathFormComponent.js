@@ -2,8 +2,8 @@ import { Button, Segment, Table } from 'semantic-ui-react'
 import React from 'react';
 import MetaPath from './DrawMetaPath.js';
 import MetaPathLabels from './DrawMetaPathLabels';
-import ErrorMessage from './DisplayErrorComponent';
-import ReactLoader from './DimmerComponent';
+import ErrorMessage from '../DisplayErrorComponent';
+import ReactLoader from '../DimmerComponent';
 
 export const MetaPathForm = (props) => {
     const rows = props.paths.map((path, i) => {

@@ -14,7 +14,6 @@ function Footer(props) {
                 <h5>Links</h5>
                 <List>
                     <List.Item><Link to='/' className="footer-link">HOME</Link></List.Item>
-                    <List.Item><Link to='/predict' className="footer-link">PREDICT</Link></List.Item>
                     <List.Item><Link to='/explain' className="footer-link">EXPLAIN</Link></List.Item>
                     <List.Item><Link to='/advanced' className="footer-link">ADVANCED</Link></List.Item>
                 </List>

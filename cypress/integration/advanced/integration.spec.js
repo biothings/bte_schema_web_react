@@ -65,22 +65,23 @@ describe('Test Advanced Query Page', () => {
     cy.get('.tippy-content:visible').find('.delete').click();
   })
 
-  it('Can enter a sample query', () => {
-    cy.get('.button').contains('Edit').click();
-    cy.get('#cy').click();
-    cy.wait(500);
-    cy.get('#cy').click(100, 100);
-    cy.get('.tippy-content:visible').find('.multiple').first().click().type('MONDO:0005737');
-    cy.get('.tippy-content:visible').find('.addition').click();
-    cy.get('.tippy-content:visible').find('.multiple').eq(1).click().type('disease');
-    cy.get('.tippy-content:visible').find('.item').first().click();
+  //enter query manually using id
+  // it('Can enter a sample query', () => {
+  //   cy.get('.button').contains('Edit').click();
+  //   cy.get('#cy').click();
+  //   cy.wait(500);
+  //   cy.get('#cy').click(100, 100);
+  //   cy.get('.tippy-content:visible').find('.multiple').first().click().type('MONDO:0005737');
+  //   cy.get('.tippy-content:visible').find('.addition').click();
+  //   cy.get('.tippy-content:visible').find('.multiple').eq(1).click().type('disease');
+  //   cy.get('.tippy-content:visible').find('.item').first().click();
 
-    cy.get('#cy').click();
-    cy.wait(500);
-    cy.get('#cy').click(300, 100);
-    cy.get('.tippy-content:visible').find('.multiple').eq(1).click().type('gene');
-    cy.get('.tippy-content:visible').find('.item').first().click();
-  })
+  //   cy.get('#cy').click();
+  //   cy.wait(500);
+  //   cy.get('#cy').click(300, 100);
+  //   cy.get('.tippy-content:visible').find('.multiple').eq(1).click().type('gene');
+  //   cy.get('.tippy-content:visible').find('.item').first().click();
+  // })
   
   // it('Can specify and remove an input', () => {
   //   cy.get('.button').contains('Edit').click();
@@ -90,18 +91,20 @@ describe('Test Advanced Query Page', () => {
   //   cy.get('.tippy-content:visible').find('.delete').click();
   // })
 
-  // it('Can enter a sample query', () => {
-  //   cy.get('#cy').click();
-  //   cy.wait(500);
-  //   cy.get('#cy').click(100, 100);
-  //   cy.get('.tippy-content:visible').find('.multiple').first().click().type('ebola');
-  //   cy.get('.tippy-content:visible').find('.item').contains('Ebola hemorrhagic fever').click();
-  //   cy.get('#cy').click();
-  //   cy.wait(500);
-  //   cy.get('#cy').click(300, 100);
-  //   cy.get('.tippy-content:visible').find('.multiple').eq(1).click().type('gene');
-  //   cy.get('.tippy-content:visible').find('.item').first().click();
-  // })
+  // enter query using autocomplete (doesn't seem to work with cypress:run for some reason)
+  it('Can enter a sample query', () => {
+    cy.get('#cy').click();
+    cy.wait(500);
+    cy.get('#cy').click(100, 100);
+    cy.get('.tippy-content:visible').find('.multiple').first().click().type('ebola');
+    cy.wait(5000);
+    cy.get('.tippy-content:visible').find('.item').contains('Ebola hemorrhagic fever').click();
+    cy.get('#cy').click();
+    cy.wait(500);
+    cy.get('#cy').click(300, 100);
+    cy.get('.tippy-content:visible').find('.multiple').eq(1).click().type('gene');
+    cy.get('.tippy-content:visible').find('.item').first().click();
+  })
 
   it('Can successfully query BTE', () => {
     cy.get('.button:visible').contains('Query BTE').click();
@@ -167,5 +170,13 @@ describe('Test Advanced Query Page', () => {
     cy.get('.button:visible').contains('Query ARS').click();
     cy.get('#ars-button').should('exist');
     cy.get('.warning').should('exist');
+  })
+
+  it('Shows TRAPI Query', () => {
+    cy.get('.button:visible').contains('View TRAPI Query').click();
+    cy.get('.modal > .content').contains('n1');
+    cy.get('.modal > .content').contains('ids');
+    cy.get('.modal > .content').contains('categories');
+    cy.get('.modal > .content').contains('MONDO:0005737');
   })
 });

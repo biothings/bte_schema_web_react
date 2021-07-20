@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Dropdown, Grid, Icon, Button, Popup } from 'semantic-ui-react';
+import { Dropdown, Grid, Icon, Button } from 'semantic-ui-react';
 import BiomedicalIDDropdown from './BiomedicalIDDropdown';
 
 import { colorSchema, semanticTypeShorthand } from '../../../shared/semanticTypes';
@@ -343,6 +343,7 @@ export default class AdvancedQueryGraph extends Component {
     });
 
     let eh = cy.edgehandles({hoverDelay: 0});
+    eh.disable();
 
     this.props.setCy(cy);
     this.setState({eh: eh}); 
@@ -356,18 +357,6 @@ export default class AdvancedQueryGraph extends Component {
             <Grid.Column>
               <h2>
                 Query Graph &nbsp;&nbsp;
-                <Popup 
-                  trigger={ <Icon circular name="info" size="tiny" style={{verticalAlign: 4}}/> }
-                >
-                  <Popup.Content>
-                    <div>
-                      <p>Use Edit mode to add attributes to nodes/edges and reposition nodes.</p>
-                      <p>Left click while in Add Node mode to place nodes.</p>
-                      <p>Click and drag while in Add Edge mode to create new edges.</p>
-                      <p>Right click to remove nodes/edges.</p>
-                    </div>
-                  </Popup.Content>
-                </Popup> 
                 </h2>
             </Grid.Column>
             <Grid.Column style={{textAlign: "center"}}>

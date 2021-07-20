@@ -1,8 +1,12 @@
 import React, { Component, useState } from 'react';
-import { Button, Header, Container, Modal, Message, Menu } from 'semantic-ui-react';
+import { Button, Header, Container, Modal, Message, Menu, Form, TextArea, Icon, Accordion } from 'semantic-ui-react';
+
 import { Navigation } from '../../components/Breadcrumb';
 import ResultsTable from './table/ResultsTableComponent';
 import AdvancedQueryGraph from './graph/AdvancedQueryGraphComponent';
+import { convertTRAPItoEles } from './utils';
+import { simpleExample } from './examples';
+
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -19,7 +23,7 @@ const TRAPIQueryButton = ({TRAPIQuery}) => {
     <Header>Current TRAPI Query</Header>
     <Modal.Content>
       <p style={{"whiteSpace": "pre-wrap"}}>
-        {JSON.stringify(TRAPIQuery(), null, 2)}
+        {JSON.stringify(TRAPIQuery(true), null, 2)}
       </p>
     </Modal.Content>
   </Modal>
@@ -50,6 +54,34 @@ const ARSDisplay = ({arsPK}) => {
   }
 }
 
+const ImportGraphButton = ({importGraph}) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [value, setValue] = useState(''); //keep track of form value
+
+  const handleSubmit = () => {
+    importGraph(JSON.parse(value));
+    setModalOpen(false);
+  }
+
+  return <Modal
+    closeIcon
+    open={modalOpen}
+    trigger={<Button basic color='violet'>Import Graph</Button>}
+    onClose={() => setModalOpen(false)}
+    onOpen={() => setModalOpen(true)}
+  >
+    <Header>Import Graph From TRAPI</Header>
+    <Modal.Content>
+      <Form>
+        <TextArea value={value} onChange={(e) => setValue(e.target.value)} rows={10}/>
+        <Button color='violet' onClick={() => handleSubmit()} style={{marginTop: "0.5rem"}}>
+          Import
+        </Button>
+      </Form>
+    </Modal.Content>
+  </Modal>
+}
+
 class AdvancedQuery extends Component {
   constructor(props) {
     super(props);
@@ -68,6 +100,8 @@ class AdvancedQuery extends Component {
     this.setCy = this.setCy.bind(this);
     this.cyJSON = this.cyJSON.bind(this);
     this.TRAPIQuery = this.TRAPIQuery.bind(this);
+    this.clearGraph = this.clearGraph.bind(this);
+    this.importGraph = this.importGraph.bind(this);
 
     this.graphRef = React.createRef();
 
@@ -93,36 +127,74 @@ class AdvancedQuery extends Component {
     return this.state.cy.json && this.state.cy.json();
   }
 
+  clearGraph() {
+    this.state.cy.remove(this.state.cy.nodes());
+  }
+
+  //take in a trapi graph and display it in the visual query builder
+  importGraph(trapi) {
+    this.clearGraph();
+    convertTRAPItoEles(trapi).then((eles) => {
+      this.state.cy.add(eles);
+      let layout = this.state.cy.elements().layout({
+        name: 'klay',
+        klay: {
+          edgeSpacingFactor: 2,
+          spacing: 100
+        }
+      });
+      layout.run();
+      layout.stop();
+    });
+  }
+
   //get trapi query for cy graph
-  TRAPIQuery() {
+  //sequentialNumbering - number nodes and edges sequential eg. node01, node02, edge01, edge02, etc
+  TRAPIQuery(sequentialNumbering = false) {
     let jsonGraph = this.cyJSON();
     let nodes = {};
+
+    //store mapping from hashes to sequential numbering
+    let mapping = {};
     if (jsonGraph && jsonGraph.elements.nodes) {
-      jsonGraph.elements.nodes.forEach((node) => {
-        nodes[node.data.id] = {};
+      jsonGraph.elements.nodes.forEach((node, i) => {
+        let id = node.data.id;
+        if (sequentialNumbering) {
+          id = `n${(i+1)}`;
+          mapping[node.data.id] = id;
+        } else {
+          mapping[node.data.id] = node.data.id;
+        }
+
+        nodes[id] = {};
 
         //don't include ids or categories field if they are empty arrays
         if (Array.isArray(node.data.ids) && node.data.ids.length > 0) {
-          nodes[node.data.id].ids = node.data.ids;
+          nodes[id].ids = node.data.ids;
         };
         if (Array.isArray(node.data.categories) && node.data.categories.length > 0) {
-          nodes[node.data.id].categories = _.map(node.data.categories, category => `biolink:${category}`);
+          nodes[id].categories = _.map(node.data.categories, category => `biolink:${category}`);
         }
       });
     }
 
     let edges = {};
     if (jsonGraph && jsonGraph.elements.edges) {
-      jsonGraph.elements.edges.forEach((edge) => {
+      jsonGraph.elements.edges.forEach((edge, i) => {
+        let id = edge.data.id;
+        if (sequentialNumbering) {
+          id = `e${(i+1)}`;
+        }
+
         let pred = _.map(edge.data.predicates, predicate => `biolink:${predicate}`);
-        edges[edge.data.id] = {
-          "subject": edge.data.source,
-          "object": edge.data.target
+        edges[id] = {
+          "subject": mapping[edge.data.source],
+          "object": mapping[edge.data.target]
         };
 
         //only include predicates field if it is defined
         if (pred.length) {
-          edges[edge.data.id].prediates = pred;
+          edges[id].prediates = pred;
         }
       });
     }
@@ -251,16 +323,47 @@ class AdvancedQuery extends Component {
   }
 
   render() {
+    let panels = [
+      {
+        key: "how-to",
+        title: "How do I use the visual query builder?",
+        content: {
+          content: (
+            <div>
+              <p>Use Edit mode to add attributes to nodes/edges and reposition nodes.</p>
+              <p>Left click while in Add Node mode to place nodes.</p>
+              <p>Click and drag while in Add Edge mode to create new edges.</p>
+              <p>Right click to remove nodes/edges.</p>
+            </div>
+          ) 
+        }
+      },
+      {
+        key: "examples",
+        title: "Examples",
+        content: {
+          content: (
+            <div>
+              <Button color='violet' basic onClick={(e) => {e.preventDefault(); this.importGraph(simpleExample)}}>Basic Example</Button>
+            </div>
+          )
+        } 
+      }
+    ];
     return (
       <Container className="feature">
         <Navigation name="Advanced" />
+        <div style={{marginTop: '0.5rem'}}><Icon circular name="info"/></div>
+        <Accordion panels={panels}/>
         
+
         <AdvancedQueryGraph ref={this.graphRef} edgeQuery={this.edgeQuery} nodeQuery={this.nodeQuery} cy={this.state.cy} setCy={this.setCy}/>
         
         <Button color='violet' onClick={this.defaultQuery} loading={this.state.loading}>Query BTE</Button>
         <Button color='violet' onClick={this.makeARSQuery} loading={this.state.loadingARS}>Query ARS</Button>
         
         <TRAPIQueryButton TRAPIQuery={this.TRAPIQuery}/>
+        <ImportGraphButton importGraph={this.importGraph}/>
 
         <Menu pointing secondary>
           <Menu.Item 

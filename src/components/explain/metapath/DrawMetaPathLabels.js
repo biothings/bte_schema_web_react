@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {colorSchema, semanticTypeShorthand} from '../shared/semanticTypes'
+import {colorSchema, semanticTypeShorthand} from '../../../shared/semanticTypes'
 import * as d3 from 'd3';
 import _ from 'lodash';
 

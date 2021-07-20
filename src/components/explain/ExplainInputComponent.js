@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Button, Segment, Popup } from 'semantic-ui-react'
-import ErrorMessage from '../../components/DisplayErrorComponent';
+import ErrorMessage from './DisplayErrorComponent';
 
-import InputSelect from '../../components/InputSelectComponent';
+import InputSelect from './InputSelectComponent';
 
 import Disease from '../../assets/icons/Disease.png';
 import Gene from '../../assets/icons/Gene.png';

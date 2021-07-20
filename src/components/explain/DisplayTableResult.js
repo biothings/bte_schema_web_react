@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import React from 'react'
 import { Table, Pagination, Checkbox, Icon, Popup, Accordion, Form, Button, Menu } from 'semantic-ui-react'
-import { getPublicationLink } from '../shared/utils'
+import { getPublicationLink } from '../../shared/utils'
 
 export default function BTETable(props) {
     const headers = props.table.display.length > 0 ? Object.keys(props.table.display[0]) : [];
