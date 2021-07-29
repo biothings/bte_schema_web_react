@@ -1,5 +1,6 @@
 import { autocomplete } from 'biomedical-id-autocomplete';
 import { recordToDropdownOption } from '../../shared/utils';
+import { colorSchema, semanticTypeShorthand } from '../../shared/semanticTypes';
 
 //remove 'biolink:' from an array of strings
 const removeBiolinkPrefix = (arr) => {
@@ -21,15 +22,33 @@ const toArray = (value) => {
 const convertTRAPItoEles = async (trapi) => {
   let nodes = trapi.message.query_graph.nodes;
   nodes = await Promise.all(Object.entries(nodes).map(async ([key, node]) => {
+    //set label and color of node based on properties
+    let ids = toArray(node.ids);
+    let categories = removeBiolinkPrefix(toArray(node.categories));
+    let label, color;
+    if (categories.length === 0 && ids.length === 0) {
+      label = 'Any';
+      color = 'black';
+    } else if (categories.length === 1) {
+      label = categories[0];
+      color = colorSchema[semanticTypeShorthand[categories[0]]];
+    } else if (ids.length > 0) {
+      label = ids.join(', ');
+      color = 'black';
+    } else {
+      label = 'Multi';
+      color = 'black';
+    }
+
     return {
       group: 'nodes', 
       data: {
-        label: key, 
-        color: 'black', 
+        label: label, 
+        color: color, 
         id: key, 
-        ids: toArray(node.ids), 
-        categories: removeBiolinkPrefix(toArray(node.categories)), 
-        options: await Promise.all(toArray(node.ids).map(async node_id => {
+        ids: ids, 
+        categories: categories, 
+        options: await Promise.all(ids.map(async node_id => {
           //attempt to get autocomplete results for ids
           let autocomplete_results = await autocomplete(node_id);
           autocomplete_results = Object.keys(autocomplete_results).map((key) => autocomplete_results[key]).flat();
@@ -50,6 +69,7 @@ const convertTRAPItoEles = async (trapi) => {
     data: {label: key, 
       color: 'black', 
       id: key, 
+      label: removeBiolinkPrefix(toArray(edge.predicates)).join(', '),
       source: edge.subject, 
       target: edge.object, 
       predicates: removeBiolinkPrefix(toArray(edge.predicates))
