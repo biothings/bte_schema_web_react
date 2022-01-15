@@ -194,7 +194,7 @@ class AdvancedQuery extends Component {
 
         //only include predicates field if it is defined
         if (pred.length) {
-          edges[id].prediates = pred;
+          edges[id].predicates = pred;
         }
       });
     }
