@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import Main from './components/Main';
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './components/home/Home';
+import AdvancedQuery from './components/advanced/AdvancedQueryComponent';
 
 class App extends Component {
 
   render() {
     return (
       <BrowserRouter basename="/explorer">
-        <Main />
+        <div>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/query" element={<AdvancedQuery />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     );
   }

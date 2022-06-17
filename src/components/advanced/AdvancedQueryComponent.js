@@ -6,6 +6,7 @@ import ResultsTable from './table/ResultsTableComponent';
 import AdvancedQueryGraph from './graph/AdvancedQueryGraphComponent';
 import { convertTRAPItoEles } from './utils';
 import { simpleExample } from './examples';
+import { Page } from '../Page';
 
 import axios from 'axios';
 import _ from 'lodash';
@@ -351,47 +352,49 @@ class AdvancedQuery extends Component {
       }
     ];
     return (
-      <Container className="feature">
-        <Navigation name="Advanced" />
-        <div style={{marginTop: '0.5rem'}}><Icon circular name="info"/></div>
-        <Accordion panels={panels}/>
-        
+      <Page>
+        <Container className="feature">
+          <Navigation name="Query" />
+          <div style={{marginTop: '0.5rem'}}><Icon circular name="info"/></div>
+          <Accordion panels={panels}/>
+          
 
-        <AdvancedQueryGraph ref={this.graphRef} edgeQuery={this.edgeQuery} nodeQuery={this.nodeQuery} cy={this.state.cy} setCy={this.setCy}/>
-        
-        <Button color='violet' onClick={this.defaultQuery} loading={this.state.loading}>Query BTE</Button>
-        <Button color='violet' onClick={this.makeARSQuery} loading={this.state.loadingARS}>Query ARS</Button>
-        
-        <TRAPIQueryButton TRAPIQuery={this.TRAPIQuery}/>
-        <ImportGraphButton importGraph={this.importGraph}/>
+          <AdvancedQueryGraph ref={this.graphRef} edgeQuery={this.edgeQuery} nodeQuery={this.nodeQuery} cy={this.state.cy} setCy={this.setCy}/>
+          
+          <Button color='violet' onClick={this.defaultQuery} loading={this.state.loading}>Query BTE</Button>
+          <Button color='violet' onClick={this.makeARSQuery} loading={this.state.loadingARS}>Query ARS</Button>
+          
+          <TRAPIQueryButton TRAPIQuery={this.TRAPIQuery}/>
+          <ImportGraphButton importGraph={this.importGraph}/>
 
-        <Menu pointing secondary>
-          <Menu.Item 
-            name='BTE'
-            active={this.state.activeItem === 'BTE'}
-            onClick={this.handleMenuClick}
-          />
-          <Menu.Item 
-            name='ARS'
-            active={this.state.activeItem === 'ARS'}
-            onClick={this.handleMenuClick}
-          />
-        </Menu>
+          <Menu pointing secondary>
+            <Menu.Item 
+              name='BTE'
+              active={this.state.activeItem === 'BTE'}
+              onClick={this.handleMenuClick}
+            />
+            <Menu.Item 
+              name='ARS'
+              active={this.state.activeItem === 'ARS'}
+              onClick={this.handleMenuClick}
+            />
+          </Menu>
 
-        <div style={{display: this.state.activeItem === 'BTE' ? 'block' : 'none'}}>
-          <ResultsTable 
-            response={this.state.response}
-            mode={this.state.mode}
-            selectedElementID={this.state.selectedElementID}
-            cy={this.state.cy}
-            setCy={this.setCy}
-            key={this.state.selectedElementID} //force creation of new element when selected element changes
-          />
-        </div>
-        <div style={{display: this.state.activeItem === 'ARS' ? 'block' : 'none'}}>
-          <ARSDisplay arsPK={this.state.arsPK} />
-        </div>
-      </Container>
+          <div style={{display: this.state.activeItem === 'BTE' ? 'block' : 'none'}}>
+            <ResultsTable 
+              response={this.state.response}
+              mode={this.state.mode}
+              selectedElementID={this.state.selectedElementID}
+              cy={this.state.cy}
+              setCy={this.setCy}
+              key={this.state.selectedElementID} //force creation of new element when selected element changes
+            />
+          </div>
+          <div style={{display: this.state.activeItem === 'ARS' ? 'block' : 'none'}}>
+            <ARSDisplay arsPK={this.state.arsPK} />
+          </div>
+        </Container>
+      </Page>
     )
   }
 }

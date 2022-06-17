@@ -1,22 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Grid, List, Icon } from 'semantic-ui-react';
+import { Grid, Icon } from 'semantic-ui-react';
 import './Footer.css';
 
 function Footer(props) {
     return(
-        <Grid style={{backgroundColor: '#9f7de8', padding: '1rem 5vw', marginTop: '2.5rem'}} textAlign='center' centered columns={3} stackable>
+        <Grid style={{backgroundColor: '#9f7de8', padding: '1rem 5vw', marginTop: '2.5rem'}} textAlign='center' centered columns={2} stackable>
             <Grid.Column textAlign='left'>
                 <h5>Biothings Explorer</h5>
                 <p>© Copyright 2017-{new Date().getFullYear()} The Su/Wu Lab.</p>
-            </Grid.Column>
-            <Grid.Column textAlign='left'>
-                <h5>Links</h5>
-                <List>
-                    <List.Item><Link to='/' className="footer-link">HOME</Link></List.Item>
-                    <List.Item><Link to='/explain' className="footer-link">EXPLAIN</Link></List.Item>
-                    <List.Item><Link to='/advanced' className="footer-link">ADVANCED</Link></List.Item>
-                </List>
             </Grid.Column>
             <Grid.Column textAlign='left'>
                 <h5>Contact Us</h5>

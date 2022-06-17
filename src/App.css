@@ -99,7 +99,7 @@ path.link {
 }
 
 .homeCard {
-    width: 80% !important;
+    width: min(80%, 650px) !important;
 }
 
 .intro h1 {
@@ -128,4 +128,11 @@ path.link {
     margin-left: 2rem;
     margin-bottom: 10rem;
     margin-top: 10rem;
+}
+
+.flex-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
 }
