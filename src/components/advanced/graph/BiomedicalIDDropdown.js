@@ -27,13 +27,12 @@ export default class BiomedicalIDDropdown extends Component {
     this.currentSearchQuery = searchQuery;
     autocomplete(searchQuery).then(response => {
       if (this.currentSearchQuery === searchQuery) { //prevent old queries returning from updating the autocomplete to an unwanted value
-        let new_options = [];
-        for (let record of Object.keys(response).map((key) => response[key]).flat().sort((a, b) => (b._score - a._score))) {
+        let new_options = response.map(record => {
           let new_option = recordToDropdownOption(record);
           if (new_option) { //avoid pushing undefined
-            new_options.push(new_option);
+            return new_option;
           }
-        }
+        });
         this.setState({autocompleteOptions: new_options});
       }
     });
@@ -49,7 +48,6 @@ export default class BiomedicalIDDropdown extends Component {
       <Dropdown 
         placeholder='IDs  eg.MONDO:0016575'
         multiple
-        search
         selection
         allowAdditions
         search={(opt, q) => (opt)}

@@ -8,7 +8,7 @@ let constructed = false;
 //gets meta kg object
 export default function getMetaKG() {
   if (!constructed) {
-    meta_kg.constructMetaKGSync();
+    meta_kg.constructMetaKG(false, {tag: 'translator'});
     constructed = true;
   }
   return meta_kg;
@@ -23,10 +23,9 @@ export function getCategories() {
       categories.add(op.association.input_type);
       categories.add(op.association.output_type);
     });
+    categories = Array.from(categories);
+    categories.sort();
   }
-
-  categories = Array.from(categories);
-  categories.sort();
 
   return categories;
 }

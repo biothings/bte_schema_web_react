@@ -145,7 +145,7 @@ export default class AdvancedQueryGraph extends Component {
   handleIDChange(data, node) {
     //calculate which items from all items are selected
     let selectedOptions = data.options.filter((option) => (data.value.includes(option.value)));
-    let selectedCategories = [...selectedOptions.map(option => option.title), ...node.data('categories')]; //list of unique cateogries of selected objects + previous selected categories
+    let selectedCategories = [...selectedOptions.map(option => option.data.primary.type || option.data.primary.cls), ...node.data('categories')]; //list of unique cateogries of selected objects + previous selected categories
     selectedCategories = [...new Set(selectedCategories)];
 
     //update data in cytoscape graph

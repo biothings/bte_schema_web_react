@@ -62,11 +62,12 @@ const getFilteredResults = (results, filter) => {
  * @returns {Object} dropdown option object
  */
 const recordToDropdownOption = (record) => {
+    console.log(record);
     if (record.primary) { //avoid some problem entries
         return {
             key: `${record.primary.value}-${_.uniqueId()}`,
             text: record.name,
-            image: {spaced: 'right', src: `/explorer/assets/images/icons/${record.type}.png`},
+            image: {spaced: 'right', src: `/explorer/assets/images/icons/${record.primary.type || record.primary.cls}.png`},
             content: <div style={{marginTop: '-21px'}}>
                 <div style={{paddingLeft: '39px', display: 'flex', alignItems: 'center', minHeight: '28px', marginBottom: '5px'}}>
                     <div>
@@ -76,7 +77,7 @@ const recordToDropdownOption = (record) => {
                 <small>{record.display}</small>
             </div>,
             data: record,
-            title: record.type,
+            title: record.primary.type || record.primary.cls,
             value: record.primary.value
         };
     }   
