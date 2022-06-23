@@ -7,7 +7,7 @@
   "dependencies": {
     "@biothings-explorer/explain": "^2.1.0",
     "@biothings-explorer/smartapi-kg": "^4.0.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "biomedical-id-autocomplete": "^2.0.4",
     "cytoscape": "^3.15.2",
     "cytoscape-edgehandles": "^3.6.0",
