@@ -62,7 +62,6 @@ const getFilteredResults = (results, filter) => {
  * @returns {Object} dropdown option object
  */
 const recordToDropdownOption = (record) => {
-    console.log(record);
     if (record.primary) { //avoid some problem entries
         return {
             key: `${record.primary.value}-${_.uniqueId()}`,
