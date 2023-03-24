@@ -6,7 +6,6 @@ import ResultsTable from './table/ResultsTableComponent';
 import AdvancedQueryGraph from './graph/AdvancedQueryGraphComponent';
 import { convertTRAPItoEles } from './utils';
 import { simpleExample } from './examples';
-import { Page } from '../Page';
 
 import axios from 'axios';
 import _ from 'lodash';
@@ -352,8 +351,7 @@ class AdvancedQuery extends Component {
       }
     ];
     return (
-      <Page>
-        <Container className="feature">
+      <Container className="feature">
           <Navigation name="Query" />
           <div style={{marginTop: '0.5rem'}}><Icon circular name="info"/></div>
           <Accordion panels={panels}/>
@@ -393,8 +391,7 @@ class AdvancedQuery extends Component {
           <div style={{display: this.state.activeItem === 'ARS' ? 'block' : 'none'}}>
             <ARSDisplay arsPK={this.state.arsPK} />
           </div>
-        </Container>
-      </Page>
+      </Container>
     )
   }
 }

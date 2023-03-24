@@ -32,6 +32,7 @@ export default class BiomedicalIDDropdown extends Component {
           if (new_option) { //avoid pushing undefined
             return new_option;
           }
+          else return false
         });
         this.setState({autocompleteOptions: new_options});
       }

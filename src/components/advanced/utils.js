@@ -66,7 +66,8 @@ const convertTRAPItoEles = async (trapi) => {
   let edges = trapi.message.query_graph.edges;
   edges = Object.entries(edges).map(([key, edge]) => ({
     group: 'edges', 
-    data: {label: key, 
+    data: {
+      // label: key, 
       color: 'black', 
       id: key, 
       label: removeBiolinkPrefix(toArray(edge.predicates)).join(', '),
