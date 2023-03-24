@@ -1,5 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
+
 const jobsSlice = createSlice({
     name: 'jobs',
     initialState: {
@@ -167,11 +168,33 @@ const jobsSlice = createSlice({
             },
         ],
         'jobs': [],
-        'selectedQuery': {}
+        'selectedQuery': {},
+        'message': '',
+        'loading': false
     },
     reducers:{
-        updateJobs: (state, action)=>{
+        updateJobs: (state)=>{
+            console.log('%c Saving jobs: ' + state.jobs.length, 'color: blue')
+            localStorage.setItem('bte-jobs-main-site', JSON.stringify(state.jobs));
+        },
+        setLoading: (state, action)=>{
+            state.loading = action.payload
+        },
+        setJobs: (state, action)=>{
             state.jobs = action.payload
+        },
+        addJob: (state, action)=>{
+            console.log('%c Adding job...', 'color: violet')
+            console.log(action.payload)
+            state.jobs.push(action.payload);
+            console.log('%c Jobs available: ' + state.jobs.length, 'color: purple')
+        },
+        setMessage: (state, action)=>{
+            state.message = action.payload
+        },
+        deleteJobs:(state)=>{
+            // localStorage.removeItem('bte-jobs-main-site');
+            state.jobs = [];
         },
         selectQuery: (state, action)=>{
             state.examples.forEach((query) => {
@@ -191,7 +214,7 @@ const jobsSlice = createSlice({
     }
 });
 
-export const { updateJobs, selectQuery } = jobsSlice.actions;
+export const { updateJobs, selectQuery, deleteJobs, setLoading, addJob, setMessage, setJobs } = jobsSlice.actions;
 
 export const store = configureStore({
     reducer: {

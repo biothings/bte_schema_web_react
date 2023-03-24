@@ -9,24 +9,24 @@ syntaxHighlighting,
 } from "@codemirror/language";
 import { history } from "@codemirror/commands";
 import { Button } from 'semantic-ui-react';
-// import moment from 'moment';
+import logo from '../assets/biothings-explorer.svg'
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import moment from 'moment';
+import { setLoading, setMessage, addJob, updateJobs } from '../store';
+
 
 let editor = null;
 
 function CodeEditor(props) {
 
     const [desc, setDesc] = useState('');
-    const [loading, setLoading] = useState(false);
-
-    function handleChange(event) {
-       setDesc(event.target.value);
-    }
+    const dispatch = useDispatch();
+    let loading = useSelector(state => state.main.loading);
+    let message = useSelector(state => state.main.message);
 
     let language = new Compartment(),
     tabSize = new Compartment();
-
-    const [message, setMessage ] = useState('');
 
     function renderCM(){
         let state = EditorState.create({
@@ -46,34 +46,37 @@ function CodeEditor(props) {
         });
     }
 
-    // function getDateRightNow(){
-    //     return moment().format('MMMM Do YYYY, h:mm:ss');
-    // }
+    function getDateRightNow(){
+        return moment().format('MMMM Do YYYY, h:mm:ss');
+    }
 
-    async function sendRequest(query, description) {
-        setLoading(true);
-        axios.post('/v1/asyncquery', JSON.parse(query)).then(res=>{
-            setLoading(false);
+    async function sendRequest(payload) {
+        console.log('sending', payload)
+        dispatch(setLoading(true));
+        axios.post('https://api.bte.ncats.io/v1/asyncquery', JSON.parse(payload.query)).then(res=>{
             console.log(res.data)
-        //   jobs.unshift({
-        //     'id': res.data.id,
-        //     'date': getDateRightNow(),
-        //     'url': res.data.url,
-        //     'description': description
-        //   });
-            setMessage(`A new job ID has been created: ${res.data.id} `);
-        //   updateJobs();
+            setTimeout(() => {
+                dispatch(setLoading(false))
+            }, 1000);
+            let job = {
+                'id': res.data.id,
+                'date': getDateRightNow(),
+                'url': res.data.url,
+                'description': payload.description
+            };
+            dispatch(addJob(job))
+            dispatch(setMessage(`A new job ID has been created: ${res.data.id} `))
+            dispatch(updateJobs())
         }).catch(err=>{
-            setLoading(false);
+            dispatch(setLoading(false))
+            dispatch(setMessage(`Oh no: ${err} `))
             console.log(err);
-            setMessage(`Oh no: ${err} `);
             throw err;
         });
-      }
+    }
 
-    function grabLatestEdit(){
-        let text = desc || '';
-        sendRequest(editor.state.doc.toString(), text);
+    function grabLatestAndSendRequest(){
+        sendRequest({'query': editor.state.doc.toString(), 'description': desc || ''});
         setDesc('');
     }
 
@@ -85,21 +88,22 @@ function CodeEditor(props) {
         }else{
                 console.log('NO EDITOR')
         }
-    }, [props.query])
+    })
 
     return(
         <div style={{color: 'black'}}>
         <div id="CM2" className='bg-white'></div>
-        <div className='ui input' style={{marginTop: '1em'}}>
-            <input type="text" value={desc} onChange={handleChange}  placeholder="Add a short description to remember this query (optional)"/>
+        <div className='ui input labeled' style={{marginTop: '1em'}}>
+            <div className="ui label label">(Optional) Description</div>
+            <input type="text" value={desc} onChange={e => setDesc(e.target.value)}  placeholder="Add a short description to remember this query"/>
         </div>
         <div className="d-flex justify-center items-center" style={{marginTop: '1em'}}> 
-            <Button loading={loading ? true : false } color='orange' onClick={()=> grabLatestEdit()}>
-                GO
+            <Button className='d-flex justify-center items-center' loading={loading ? true : false } color='orange' onClick={()=> grabLatestAndSendRequest()}>
+                <img src={logo} alt="bte" width={30} style={{marginRight: 10}}/> GO
             </Button>
         </div>
-        <p className="text-center font-bold">
-            { message }
+        <p className="text-center font-bold text-green" style={{marginTop: 20}}>
+            <b>{ message }</b>
         </p>
     </div>
     )

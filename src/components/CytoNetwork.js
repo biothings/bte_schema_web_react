@@ -56,7 +56,7 @@ function drawGraph(props) {
 }
 
 function CytoNetwork(props) {
-    useEffect(()=> drawGraph(JSON.parse(JSON.stringify(props))), [])
+    useEffect(()=> drawGraph(JSON.parse(JSON.stringify(props))))
     return(
         <div className="cy" id={props.query._id}></div>
     )

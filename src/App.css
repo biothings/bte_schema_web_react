@@ -274,7 +274,7 @@ path.link {
 }
 
 .d-flex{
-    display: flex;
+    display: flex !important;
 }
 
 .justify-center{
@@ -332,7 +332,7 @@ path.link {
 }
 
 .text-green{
-    color: #00A99D;
+    color: #7ae42e;
 }
 
 .color-change-purple-1 {

@@ -1,19 +1,36 @@
-import React, { useState } from "react";
-import { Container, Grid, Segment } from "semantic-ui-react";
+import React, { useState, useEffect } from "react";
+import { Container, Grid, Segment, Button } from "semantic-ui-react";
 import QueryBox from "../components/QueryBox";
 import CodeEditor from "../components/CodeEditor";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteJobs, setJobs, updateJobs } from "../store";
 
 function TryIt(){
 
+    const dispatch = useDispatch();
+
+    useEffect(()=> {
+        // localStorage.setItem('bte-jobs-main-site', JSON.stringify([]))
+        console.log('%c Checking jobs...', 'color: limegreen')
+        let jobs = JSON.parse(localStorage.getItem('bte-jobs-main-site'));
+        if (jobs && jobs.length) {
+            console.log('%c Jobs found!', 'color: green')
+            dispatch(setJobs(jobs))
+            dispatch(updateJobs())
+        }else{
+            console.log('%c No jobs yet', 'color: orange')
+        }
+    }, []);
+
     let queries = useSelector(state => state.main.examples);
+    let jobs = useSelector(state => state.main.jobs);
     let selectedQuery = useSelector(state => state.main.selectedQuery);
 
-    const [jobs] = useState([]);
-    const [jobURL] = useState('');
+    const [jobURL, setJobURL] = useState('');
 
-    function deleteJobs(){
-
+    function deleteAllJobs(){
+        dispatch(deleteJobs());
+        dispatch(updateJobs());
     }
 
     return <Grid className="gradient text-left min-h-100">
@@ -30,9 +47,7 @@ function TryIt(){
                                 <Grid.Column>
                                     <h2 className="text-white">1. Select a query</h2>
                                     <div className="d-flex flex-wrap justify-center">
-                                        {queries.map((q) => {
-                                            return <QueryBox query={q} key={q._id}></QueryBox>
-                                        })}
+                                        {queries.map(q => <QueryBox query={q} key={q._id}></QueryBox>)}
                                     </div>
                                 </Grid.Column>
                                 <Grid.Column>
@@ -46,26 +61,26 @@ function TryIt(){
                                 </Grid.Column>
                             </Grid.Row>
                             <Grid.Row columns={1}>
-                                <Grid.Column color="pink" span="2">
-                                <h2>3. Check your results. <span>Pick a <b className="text-green">job ID</b> and see if BTE is done with your request.</span></h2>
-                                    <p >Note: BioThings Explorer keeps your job history for up to a week.</p>
+                                <Grid.Column>
+                                <h2 className="text-white">3. Check your results. <span>Pick a <b className="text-green">job ID</b> and see if BTE is done with your request.</span></h2>
+                                    <p className="text-white">Note: BioThings Explorer keeps your job history for up to a week.</p>
                                     <div className="d-flex justify-center items-center">
-                                        {jobs?.length  > 0 && <div>
-                                            <label for="job-select">Choose a job ID</label>
-                                            <select v-model="JobURL" name="jobs" id="job-select">
+                                        <div>
+                                            <label className="text-white">Choose a job ID</label>
+                                            <select style={{padding: 10, margin: 20, borderRadius: 5}} onChange={e => setJobURL(e.target.value)} name="jobs" id="job-select">
                                                 <option value="">Choose one</option>
                                                 {jobs.map((job) => {
-                                                    return <option value="job.url">{ job.id } { job?.description } - { job.date }</option>
+                                                    return <option value={job.url} key={job.id}>{ job.id } { job?.description } - { job.date }</option>
                                                 })}
                                             </select>
-                                        </div>}
-                                        {jobs?.length  === 0 && <p className="text-center"> No jobs have been created yet.</p>}
-                                        {jobURL && <a target="_blank" href="JobURL" rel="noopener noreferrer">
-                                            Check Results
+                                        </div>
+                                        {jobs?.length  === 0 && <p className="text-center text-yellow"> No jobs have been created yet.</p>}
+                                        {jobURL && <a target="_blank" href={jobURL} rel="noopener noreferrer" style={{margin: 10}}>
+                                            <Button color="green">Check Results</Button>
                                         </a>}
-                                        {jobs?.length  > 0 && <button onClick={deleteJobs()}>
+                                        {jobs?.length  > 0 && <Button inverted color="red" onClick={deleteAllJobs}>
                                             Delete All Jobs
-                                        </button>}
+                                        </Button>}
                                     </div>
                                 </Grid.Column>
                             </Grid.Row>
