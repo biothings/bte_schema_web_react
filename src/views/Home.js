@@ -15,7 +15,7 @@ const Home = () => (
           <Image src={logo} width="500" className="m-auto"/> 
           <h2 className='text-white caps'>A query engine for a federated knowledge graph of biomedical APIs</h2>
           <div>
-            <Link to='/query'><Button color='orange' size='massive'>Try BioThings Explorer Now <i aria-hidden="true" className="angle right icon"></i></Button></Link>
+            <Link to='/try-it'><Button color='orange' size='massive'>Try BioThings Explorer Now <i aria-hidden="true" className="angle right icon"></i></Button></Link>
           </div>
         </Grid.Column>
       </Grid.Row>

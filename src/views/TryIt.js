@@ -37,7 +37,7 @@ function TryIt(){
                 <Grid.Row>
                     <Container>
                         <Segment color="black" inverted>
-                            <h1>Example Queries</h1>
+                            <h1>Try BioThings Explorer</h1>
                             <p>
                                 BioThings Explorer allows users to query a vast amount of biological and chemical databases in a central place to answer and predict complex biological questions.
                             </p>

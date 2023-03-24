@@ -28,7 +28,7 @@ export function Header(props) {
                     >
                     About
                 </Menu.Item>
-                <Menu.Item
+                {/* <Menu.Item
                     name='QUERY'
                     as={Link}
                     to='/query'
@@ -36,16 +36,7 @@ export function Header(props) {
                     onClick={()=>{setClicked('QUERY')}}
                     >
                     Advanced Query Builder
-                </Menu.Item>
-                <Menu.Item
-                    name='TRY'
-                    as={Link}
-                    to='/try-it'
-                    active={clicked === 'TRY'}
-                    onClick={()=>{setClicked('TRY')}}
-                    >
-                    Try It
-                </Menu.Item>
+                </Menu.Item> */}
                 <Dropdown item text='Getting Started'>
                     <Dropdown.Menu>
                         <Dropdown.Item 
@@ -68,6 +59,15 @@ export function Header(props) {
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
+                <Menu.Item
+                    name='TRY'
+                    as={Link}
+                    to='/try-it'
+                    active={clicked === 'TRY'}
+                    onClick={()=>{setClicked('TRY')}}
+                    >
+                    Try It
+                </Menu.Item>
                 <Menu.Item
                     name='DOCS'
                     target="_blank"

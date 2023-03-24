@@ -193,7 +193,7 @@ const jobsSlice = createSlice({
             state.message = action.payload
         },
         deleteJobs:(state)=>{
-            // localStorage.removeItem('bte-jobs-main-site');
+            localStorage.removeItem('bte-jobs-main-site');
             state.jobs = [];
         },
         selectQuery: (state, action)=>{
