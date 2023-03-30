@@ -32,7 +32,7 @@ function InstallPage(){
             <div id="md"></div>
             <Segment inverted color="purple" className="text-center text-white" style={{marginBottom: '5vh', padding: 90}}>
                 <h2>BTE Usage</h2>
-                <Link to='/install'>
+                <Link to='/usage'>
                     <h3 className="text-white">Continue to learn how to use BioThings Explorer <i aria-hidden="true" className="angle right icon"></i></h3>
                 </Link>
             </Segment>

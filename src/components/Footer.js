@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Icon } from 'semantic-ui-react';
 
-function Footer(props) {
+function Footer() {
     return(
         <Grid style={{padding: '2rem 6vw', color: 'white'}} className="gradient-rainbow" textAlign='center' centered columns={2} stackable>
             <Grid.Column textAlign='left'>
@@ -14,6 +14,14 @@ function Footer(props) {
             <Grid.Column textAlign='left'>
                 <a href="https://biothings.io/" title="BioThings API"><img width="256px" src="http://biothings.io/static/img/powered-by-biothings.png" alt="BioThings"/></a>
                 <h5>Contact Us</h5>
+                <p>
+                    <a href="https://twitter.com/biothingsapi" target="_blank" rel="noopener noreferrer">
+                        <Icon name='twitter' size='large' />
+                    </a>
+                    <a href="https://github.com/biothings/BioThings_Explorer_TRAPI" target="_blank" rel="noopener noreferrer">
+                        <Icon name='github' size='large' />
+                    </a>
+                </p>
                 <p><Icon name='mail' size='large' />: <a href="mailto:biothings@googlegroups.com" className="footer-link">biothings@googlegroups.com</a></p>
             </Grid.Column>
         </Grid>

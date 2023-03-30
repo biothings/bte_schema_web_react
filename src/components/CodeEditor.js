@@ -51,10 +51,8 @@ function CodeEditor(props) {
     }
 
     async function sendRequest(payload) {
-        console.log('sending', payload)
         dispatch(setLoading(true));
-        axios.post('https://api.bte.ncats.io/v1/asyncquery', JSON.parse(payload.query)).then(res=>{
-            console.log(res.data)
+        axios.post('https://bte.transltr.io/v1/asyncquery', JSON.parse(payload.query)).then(res=>{
             setTimeout(() => {
                 dispatch(setLoading(false))
             }, 1000);
@@ -66,6 +64,9 @@ function CodeEditor(props) {
             };
             dispatch(addJob(job))
             dispatch(setMessage(`A new job ID has been created: ${res.data.id} `))
+            setTimeout(() => {
+                dispatch(setMessage(''))
+            }, 10000);
             dispatch(updateJobs())
         }).catch(err=>{
             dispatch(setLoading(false))
@@ -86,7 +87,7 @@ function CodeEditor(props) {
         if (editor) {
                 editor.dispatch({changes: {from: 0, to: editor.state.doc.length, insert: JSON.stringify( props.query, null, 2)}});
         }else{
-                console.log('NO EDITOR')
+                console.warn('NO CODE EDITOR CREATED')
         }
     })
 
@@ -94,8 +95,8 @@ function CodeEditor(props) {
         <div style={{color: 'black'}}>
         <div id="CM2" className='bg-white'></div>
         <div className='ui input labeled' style={{marginTop: '1em'}}>
-            <div className="ui label label">(Optional) Description</div>
-            <input type="text" value={desc} onChange={e => setDesc(e.target.value)}  placeholder="Add a short description to remember this query"/>
+            <div className="ui label label">(Optional) Short Name</div>
+            <input type="text" maxLength="30" value={desc} onChange={e => setDesc(e.target.value)}  placeholder="Add a short name to remember this query (30 max)"/>
         </div>
         <div className="d-flex justify-center items-center" style={{marginTop: '1em'}}> 
             <Button className='d-flex justify-center items-center' loading={loading ? true : false } color='orange' onClick={()=> grabLatestAndSendRequest()}>

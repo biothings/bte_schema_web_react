@@ -9,6 +9,15 @@ import TryIt from './views/TryIt';
 import AdvancedQuery from './components/advanced/AdvancedQueryComponent';
 import { Header } from './components/Header';
 import Footer from './components/Footer';
+import {delegate} from 'tippy.js';
+import 'tippy.js/themes/light.css';
+
+delegate('#root', {
+  target: '[data-tippy-content]',
+  theme: 'light',
+  interactive: true,
+  allowHTML: true
+});
 
 class App extends Component {
 

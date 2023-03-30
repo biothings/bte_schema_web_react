@@ -68,7 +68,8 @@ function drawGraph() {
                 'color': 'white',
                 'text-outline-width': 0,
                 'background-fit': 'cover',
-                'text-wrap': 'wrap'
+                'text-wrap': 'wrap',
+                'font-size': '2em'
             })
             .selector('edge')
             .css({
@@ -135,8 +136,9 @@ function drawGraph() {
         evt.target.deselect()
     });
 
-    cy.maxZoom(2);
-    cy.minZoom(.4)
+    // cy.maxZoom(2);
+    // cy.minZoom(.4)
+    cy.userZoomingEnabled( false );
     cy.fit();
 }
 
