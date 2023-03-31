@@ -95,8 +95,8 @@ function CodeEditor(props) {
         <div style={{color: 'black'}}>
         <div id="CM2" className='bg-white'></div>
         <div className='ui input labeled' style={{marginTop: '1em'}}>
-            <div className="ui label label">(Optional) Short Name</div>
-            <input type="text" maxLength="30" value={desc} onChange={e => setDesc(e.target.value)}  placeholder="Add a short name to remember this query (30 max)"/>
+            <div className="ui label label">(Optional) Query Name</div>
+            <input type="text" maxLength="30" value={desc} onChange={e => setDesc(e.target.value)}  placeholder="Add a short name to remember this query (30 characters max)"/>
         </div>
         <div className="d-flex justify-center items-center" style={{marginTop: '1em'}}> 
             <Button className='d-flex justify-center items-center' loading={loading ? true : false } color='orange' onClick={()=> grabLatestAndSendRequest()}>

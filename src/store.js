@@ -124,7 +124,7 @@ const jobsSlice = createSlice({
             },
             {
               'selected': false,
-            'name' :'Gene (NCBIGene:3778) relation to small molecules via other genes',
+            'name' :'Gene (KCNMA1) relation to small molecules via other genes',
             '_id': '0004',
             'elements': {
                     'nodes': [
