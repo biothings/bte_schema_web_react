@@ -4,16 +4,18 @@ import {marked} from 'marked'
 import axios from "axios";
 import { Container, Segment, Message } from "semantic-ui-react";
 import install from "../assets/download-01.svg"
+import { useSelector } from "react-redux";
 
-let mdURL = "https://raw.githubusercontent.com/biothings/BioThings_Explorer_TRAPI/main/docs/INSTALLATION.md";
-
-function compiledMarkdown() {
-    axios.get(mdURL).then(res=>{
-        document.getElementById('md').innerHTML = marked(res.data);
-    });
-}
 
 function InstallPage(){
+    let mdURL = useSelector(state => state.main.mdFiles.install);
+
+    function compiledMarkdown() {
+        axios.get(mdURL).then(res=>{
+            document.getElementById('md').innerHTML = marked(res.data);
+        });
+    }
+
     useEffect(()=>{
         compiledMarkdown()
     },[]);

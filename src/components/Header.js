@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import bte from '../assets/biothings-explorer-logo.png';
 import { Menu, Dropdown } from 'semantic-ui-react';
 
-export function Header(props) {
+export function Header() {
     let [clicked, setClicked] = useState('HOME');
 
     return(
@@ -56,6 +56,15 @@ export function Header(props) {
                             onClick={()=>{setClicked('USAGE')}}
                             >
                             Usage
+                        </Dropdown.Item>
+                        <Dropdown.Item 
+                            name='REFERENCE'
+                            as={Link}
+                            to='/reference'
+                            active={clicked === 'REF'}
+                            onClick={()=>{setClicked('REF')}}
+                            >
+                            Reference Sheet
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>

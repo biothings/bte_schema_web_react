@@ -167,6 +167,11 @@ const jobsSlice = createSlice({
                 }
             },
         ],
+        'mdFiles':{
+            'install': 'https://raw.githubusercontent.com/biothings/biothings_explorer/main/docs/INSTALLATION.md',
+            'usage': 'https://raw.githubusercontent.com/biothings/biothings_explorer/main/docs/USAGE.md',
+            'reference': 'https://raw.githubusercontent.com/biothings/biothings_explorer/main/docs/REFERENCE.md',
+        },
         'jobs': [],
         'selectedQuery': {},
         'message': '',

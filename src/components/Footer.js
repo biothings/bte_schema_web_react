@@ -1,5 +1,7 @@
 import React from 'react';
 import { Grid, Icon } from 'semantic-ui-react';
+import ncats from '../assets/ncats-logo.png'
+import nih from '../assets/nih-logo.png'
 
 function Footer() {
     return(
@@ -7,6 +9,10 @@ function Footer() {
             <Grid.Column textAlign='left'>
                 <h5>Biothings Explorer</h5>
                 <p>© Copyright 2017-{new Date().getFullYear()} The Su/Wu Lab.</p>
+                <div className='d-flex items-center'>
+                    <img src={ncats} width='150' alt='NCATS' style={{marginRight: 20}}/>
+                    <img src={nih} width='150' alt='NIH'/>
+                </div>
                 <p>
                     Support for this work was provided by the <a href="https://ncats.nih.gov/" target="_blank" rel="noopener noreferrer">National Center for Advancing Translational Sciences</a>, National Institutes of Health, through the <a href="https://ncats.nih.gov/translator" target="_blank" rel="noopener noreferrer">Biomedical Data Translator program</a>, awards OT2TR003427 and OT2TR003445
                 </p>

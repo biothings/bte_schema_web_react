@@ -48,7 +48,7 @@ function TryIt(){
                                 <Grid.Column>
                                     <h2 className="text-white">1. Select a query</h2>
                                     <p className="text-white">
-                                        BTE accepts a specific format of JSON object as the input ("query graph"). The graphs below represent questions about the things you're interested in (specific diseases, genes, etc) and what you'd like to know (what connections are there to other things). <a target="_blank" href="https://github.com/NCATSTranslator/ReasonerAPI#query-graph" rel="noopener noreferrer">Learn more about the query graph format &nbsp; <i aria-hidden="true" className="share square icon"></i></a>.
+                                        BTE accepts a specific format of JSON object as the input ("query graph"). The graphs below represent questions about the things you're interested in (specific diseases, genes, etc) and what you'd like to know (what connections are there to other things). <a target="_blank" href="https://github.com/NCATSTranslator/ReasonerAPI#query-graph" rel="noopener noreferrer">Learn more about the query graph format &nbsp;<i aria-hidden="true" className="share square icon"></i></a>.
                                     </p>
                                     <p className="text-white">
                                         Select one of the examples below or write your own query on the right.

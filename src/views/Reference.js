@@ -5,8 +5,8 @@ import { Container } from "semantic-ui-react";
 import install from "../assets/download-01.svg"
 import { useSelector } from "react-redux";
 
-function UsagePage(){
-    let mdURL = useSelector(state => state.main.mdFiles.usage);
+function RefPage(){
+    let mdURL = useSelector(state => state.main.mdFiles.reference);
 
     function compiledMarkdown() {
         axios.get(mdURL).then(res=>{
@@ -20,10 +20,10 @@ function UsagePage(){
 
     return <div className="text-left min-h-100">
         <Container color="gray">
-            <h1 className="d-flex items-center"><img src={install} width="50" alt="install"/>  Getting started with BioThings Explorer</h1>
+            <h1 className="d-flex items-center"><img src={install} width="50" alt="install"/>  Useful variable references when using BioThings Explorer</h1>
             <div id="md"></div>
         </Container>
     </div>
 }
 
-export default UsagePage
+export default RefPage
