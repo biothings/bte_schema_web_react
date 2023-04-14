@@ -6,7 +6,7 @@
 // https://on.cypress.io/writing-first-test
 describe('Test Advanced Query Page', () => {
   it('Visits the advanced page', () => {
-    cy.visit('/explorer/advanced');
+    cy.visit('/advanced');
   })
 
   // it('Reset things to make screenshots work', () => {

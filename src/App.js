@@ -24,7 +24,7 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter basename="/explorer">
+      <BrowserRouter basename="/">
         <Header/>
         <Routes>
             <Route exact path="/" element={<Home />} />
