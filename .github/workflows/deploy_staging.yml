@@ -3,7 +3,7 @@ name: Deploy-to-EC2-Prod
 on:
   push:
     branches:
-      - add-github-actions-deployment
+      - master
 
 jobs:
   deploy:
@@ -32,17 +32,14 @@ jobs:
           SOURCE: "/"
           SSH_PRIVATE_KEY: ${{ secrets.AWS_PROD_EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.AWS_PROD_HOST_DNS }}
-          # 52.40.118.52
           REMOTE_USER: ${{ secrets.AWS_PROD_USERNAME }}
-          # ubuntu
           TARGET: ${{ secrets.AWS_PROD_TARGET_DIR }}
-          # /home/ubuntu/explorer
           SCRIPT_AFTER: |
             set -x
             echo "Restarting nginx service..."
             sudo systemctl restart nginx
             set +x
             echo $RSYNC_STDOUT
-      - name: Setup tmate debug session on failure
-        if: ${{ failure() }}
-        uses: mxschmitt/action-tmate@v3
+      # - name: Setup tmate debug session on failure
+      #   if: ${{ failure() }}
+      #   uses: mxschmitt/action-tmate@v3
