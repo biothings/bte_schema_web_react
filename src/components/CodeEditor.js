@@ -25,27 +25,6 @@ function CodeEditor(props) {
     let loading = useSelector(state => state.main.loading);
     let message = useSelector(state => state.main.message);
 
-    let language = new Compartment(),
-    tabSize = new Compartment();
-
-    function renderCM(){
-        let state = EditorState.create({
-            doc: JSON.stringify(props.query, null, 2),
-            extensions: [
-            basicSetup,
-            history(),
-            autocompletion(),
-            language.of(json()),
-            tabSize.of(EditorState.tabSize.of(8)),
-            syntaxHighlighting(defaultHighlightStyle),
-            ],
-        });
-        editor = new EditorView({
-            state,
-            parent: document.body.querySelector("#CM2"),
-        });
-    }
-
     function getDateRightNow(){
         return moment().format('MMMM Do YYYY, h:mm:ss');
     }
@@ -81,7 +60,29 @@ function CodeEditor(props) {
         setDesc('');
     }
 
-    useEffect(()=> renderCM(), []);
+    useEffect(()=> {
+        let language = new Compartment(),
+        tabSize = new Compartment();
+        
+        function renderCM(){
+            let state = EditorState.create({
+                doc: JSON.stringify(props.query, null, 2),
+                extensions: [
+                basicSetup,
+                history(),
+                autocompletion(),
+                language.of(json()),
+                tabSize.of(EditorState.tabSize.of(8)),
+                syntaxHighlighting(defaultHighlightStyle),
+                ],
+            });
+            editor = new EditorView({
+                state,
+                parent: document.body.querySelector("#CM2"),
+            });
+        }
+        renderCM();
+    }, []);
 
     useEffect(()=>{
         if (editor) {
