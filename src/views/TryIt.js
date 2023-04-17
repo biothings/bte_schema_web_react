@@ -21,7 +21,7 @@ function TryIt(){
         }else{
             console.log('%c No jobs yet', 'color: orange')
         }
-    }, []);
+    }, [dispatch]);
 
     let queries = useSelector(state => state.main.examples);
     let jobs = useSelector(state => state.main.jobs);
@@ -63,7 +63,7 @@ function TryIt(){
                                         BTE queries work asynchronously so you will get a <b className="text-green">job ID</b> you can come back and check on in a few minutes. Please note that queries may take additional time depending on the complexity.
                                     </p>
                                     <p className="text-left text-white">
-                                        While BTE works on this, you can go grab some coffee ☕ or go pet your cat! 🐈
+                                        While BTE works on this, you can go grab some coffee or go pet your cat!
                                     </p>
                                     <div>
                                         <CodeEditor query={selectedQuery}></CodeEditor>

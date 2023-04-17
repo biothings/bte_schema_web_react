@@ -171,7 +171,7 @@ function About(){
                     <h1 className="text-white d-flex items-center"><img src={tryit} alt="biological network" width="200"/> BTE's Meta-Knowledge Graph</h1>
                     <div>
                         <figure className="text-center">
-                            <img src={network} alt="biological network" width="700"/>
+                            <img src={network} alt="biological network" width="900"/>
                             <Message className='text-left text-white' color='violet'>
                             A visualization of the meta-knowledge graph for BioThings Explorer. The nodes in this graph are the semantic types that BioThings Explorer can query on (limited to the top 10 most common semantic types). The edges between nodes represent mappings between node types that are provided by the APIs accessed by BioThings Explorer. The edge width reflects the number of APIs for each meta-edge, which is also shown as the edge label.
                             </Message>

@@ -8,15 +8,14 @@ import { useSelector } from "react-redux";
 function UsagePage(){
     let mdURL = useSelector(state => state.main.mdFiles.usage);
 
-    function compiledMarkdown() {
-        axios.get(mdURL).then(res=>{
-            document.getElementById('md').innerHTML = marked(res.data);
-        });
-    }
-
     useEffect(()=>{
+        function compiledMarkdown() {
+            axios.get(mdURL).then(res=>{
+                document.getElementById('md').innerHTML = marked(res.data);
+            });
+        }
         compiledMarkdown()
-    },[]);
+    },[mdURL]);
 
     return <div className="text-left min-h-100">
         <Container color="gray">
