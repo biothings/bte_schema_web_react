@@ -25,7 +25,7 @@ jobs:
       - name: Step 3 - Build Frontend
         run: |
           npm install
-          NODE_OPTIONS="--max-old-space-size=1512 --openssl-legacy-provider" npm run build
+          NODE_OPTIONS="--max-old-space-size=1512 --openssl-legacy-provider" CI=false npm run build
       - name: Step 4 - Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
