@@ -25,7 +25,7 @@ jobs:
       - name: Step 3 - Build Frontend
         run: |
           npm install
-          NODE_OPTIONS="--max-old-space-size=1512 --openssl-legacy-provider" npm run build
+          NODE_OPTIONS="--max-old-space-size=1512 --openssl-legacy-provider" CI=false npm run build
       - name: Step 4 - Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
@@ -43,3 +43,6 @@ jobs:
             sudo systemctl restart nginx
             set +x
             echo $RSYNC_STDOUT
+      - name: Setup tmate debug session on failure
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3
