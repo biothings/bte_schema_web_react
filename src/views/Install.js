@@ -10,15 +10,14 @@ import { useSelector } from "react-redux";
 function InstallPage(){
     let mdURL = useSelector(state => state.main.mdFiles.install);
 
-    function compiledMarkdown() {
-        axios.get(mdURL).then(res=>{
-            document.getElementById('md').innerHTML = marked(res.data);
-        });
-    }
-
     useEffect(()=>{
+        function compiledMarkdown() {
+            axios.get(mdURL).then(res=>{
+                document.getElementById('md').innerHTML = marked(res.data);
+            });
+        }
         compiledMarkdown()
-    },[]);
+    },[mdURL]);
 
     return <div className="text-left min-h-100">
         <Container color="gray">

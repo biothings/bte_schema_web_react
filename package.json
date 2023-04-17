@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "private": true,
   "proxy": "http://localhost:8856/",
-  "homepage": "https://biothings.io/explorer/",
+  "homepage": "https://biothings.io/",
   "dependencies": {
     "@biothings-explorer/explain": "^2.1.0",
     "@biothings-explorer/smartapi-kg": "^4.0.0",
