@@ -29,7 +29,7 @@ jobs:
       - name: Step 4 - Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
-          SOURCE: "/"
+          SOURCE: "/build/"
           SSH_PRIVATE_KEY: ${{ secrets.AWS_PROD_EC2_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.AWS_PROD_HOST_DNS }}
           REMOTE_USER: ${{ secrets.AWS_PROD_USERNAME }}
