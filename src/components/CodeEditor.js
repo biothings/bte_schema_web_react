@@ -49,7 +49,7 @@ function CodeEditor(props) {
             dispatch(updateJobs())
         }).catch(err=>{
             dispatch(setLoading(false))
-            dispatch(setMessage(`Oh no: ${err} `))
+            dispatch(setMessage(`Invalid query: ${err?.message}`))
             console.log(err);
             throw err;
         });
@@ -85,12 +85,12 @@ function CodeEditor(props) {
     }, []);
 
     useEffect(()=>{
-        if (editor) {
+        if (editor && props.query) {
                 editor.dispatch({changes: {from: 0, to: editor.state.doc.length, insert: JSON.stringify( props.query, null, 2)}});
         }else{
                 console.warn('NO CODE EDITOR CREATED')
         }
-    })
+    }, [props])
 
     return(
         <div style={{color: 'black'}}>
