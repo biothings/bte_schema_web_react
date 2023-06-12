@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './views/Home';
 import About from './views/About';
 import InstallPage from './views/Install';
@@ -25,6 +26,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter basename="/">
+        <ScrollToTop/>
         <Header/>
         <Routes>
             <Route exact path="/" element={<Home />} />
