@@ -1,10 +1,11 @@
 import React from 'react'
-import { Button, Image, Grid, Container } from 'semantic-ui-react'
+import { Button, Image, Grid, Container, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import AnimatedLogo from '../components/AnimatedLogo';
 import logo from '../assets/biothings-explorer-text.svg';
 import install from '../assets/download-01.svg';
 import github from '../assets/github-01.svg';
+import read from '../assets/read-01.svg';
 
 
 const Home = () => (
@@ -20,7 +21,7 @@ const Home = () => (
         </Grid.Column>
       </Grid.Row>
       <Grid.Row className="text-center gradient-black text-white">
-        <Grid.Column website={16}>
+        <Grid.Column width={16}>
           <Container>
             <AnimatedLogo/>
             <h2>Exploring Biological Data Through Linked API Services</h2>
@@ -32,13 +33,22 @@ const Home = () => (
         </Grid.Column>
       </Grid.Row>
     </Grid>
-    <Grid columns={2}>
+    <Grid columns={3}>
     <Grid.Row className="text-center text-white">
         <Grid.Column color="orange">
           <Image src={install} width="100" className="m-auto"/>
             <Link className='text-white'  to='/install'>
               <h3>Learn how  to install BioThings Explorer locally</h3>
             </Link>
+        </Grid.Column>
+        <Grid.Column color="yellow">
+          <Image src={read} width="100" className="m-auto"/>
+            <a href='https://arxiv.org/abs/2304.09344'
+            rel="noopener noreferrer"
+            style={{color: '#3a4892'}}
+            target="_blank">
+              <h3>Read the preprint <i aria-hidden="true" className="share square icon"></i></h3>
+            </a>
         </Grid.Column>
         <Grid.Column color="purple">
           <Image src={github} width="100" className="m-auto"/> 
