@@ -4,7 +4,7 @@ import ncats from '../assets/ncats-logo.png'
 
 function Footer() {
     return(
-        <Grid style={{padding: '2rem 6vw', color: 'white'}} className="gradient-rainbow" textAlign='center' centered columns={2} stackable>
+        <Grid style={{padding: '2rem 6vw', color: 'white'}} className="gradient-rainbow mt-auto" textAlign='center' centered columns={2} stackable>
             <Grid.Column textAlign='left'>
                 <h5>Biothings Explorer</h5>
                 <p>© Copyright 2017-{new Date().getFullYear()} The Su/Wu Lab.</p>
