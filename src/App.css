@@ -451,6 +451,14 @@ path.link {
     margin: auto;
 }
 
+.mt-auto {
+    margin-top: auto;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
 .gradient-rainbow{
     background: rgb(24,24,24);
     background: -moz-linear-gradient(90deg, rgba(24,24,24,1) 0%, rgba(7,7,7,1) 72%, rgba(189,55,210,1) 85%, rgba(228,117,40,1) 90%, rgba(231,180,19,1) 95%, rgba(37,199,221,1) 100%);
