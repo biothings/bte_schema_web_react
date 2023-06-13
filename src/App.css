@@ -452,7 +452,7 @@ path.link {
 }
 
 .mt-auto {
-    margin-top: auto;
+    margin-top: auto !important;
 }
 
 .mb-4 {
