@@ -7,6 +7,7 @@ import About from './views/About';
 import InstallPage from './views/Install';
 import UsagePage from './views/Usage';
 import TryIt from './views/TryIt';
+import ResultViewer from './views/ResultViewer';
 import RefPage from './views/Reference';
 import AdvancedQuery from './components/advanced/AdvancedQueryComponent';
 import { Header } from './components/Header';
@@ -33,6 +34,7 @@ class App extends Component {
             <Route path="/about" element={<About />} />
             <Route path="/install" element={<InstallPage />} />
             <Route path="/try-it" element={<TryIt />} />
+            <Route path="/view/:id" element={<ResultViewer />} />
             <Route path="/usage" element={<UsagePage />} />
             <Route path="/reference" element={<RefPage />} />
             <Route path="/query" element={<AdvancedQuery />} />

@@ -32,6 +32,23 @@ h1{
     color: #F15A24;
 }
 
+.renderjson a              { text-decoration: none; }
+.renderjson .disclosure    { color: rgb(241, 102, 21);
+                             font-size: 150%; }
+.renderjson .syntax        { color: grey; }
+.renderjson .string        { color: rgb(109, 28, 191); }
+.renderjson .number        { color: rgb(157, 22, 139); }
+.renderjson .boolean       { color: plum; }
+.renderjson .key           { color: rgb(17, 93, 118); }
+.renderjson .keyword       { color: rgb(210, 0, 0); }
+.renderjson .object.syntax { color: lightseagreen; }
+.renderjson .array.syntax  { color: lightsalmon; }
+#res pre{
+    background-color: #f2f2f2;
+    font-weight: bold;
+    margin: 0;
+}
+
 .bg-white{
     background-color: white;
 }

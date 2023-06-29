@@ -1450,7 +1450,7 @@
   "resolved" "https://registry.npmjs.org/@codemirror/state/-/state-6.2.0.tgz"
   "version" "6.2.0"
 
-"@codemirror/view@^6.0.0", "@codemirror/view@^6.6.0":
+"@codemirror/view@^6.0.0":
   "integrity" "sha512-BJ5mvEIhFM+SrNwc5X8pLIvMM9ffjkviVbxpg84Xk2OE8ZyKaEbId8kX+nAYEEso7+qnbwsXe1bkAHsasebMow=="
   "resolved" "https://registry.npmjs.org/@codemirror/view/-/view-6.9.3.tgz"
   "version" "6.9.3"
@@ -11995,6 +11995,11 @@
   "integrity" "sha1-wkvOKig62tW8P1jg1IJJuSN52O8="
   "resolved" "https://registry.npmjs.org/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz"
   "version" "1.1.0"
+
+"renderjson@^1.4.0":
+  "integrity" "sha512-R0IZoxjWQP4XMJjLkPjNKSwjDyl20EiLohyu1Os7AvIvO4F4Vtar1N6IjJLPLjDN7OYOXTsqtIVJupQnQMvYQw=="
+  "resolved" "https://registry.npmjs.org/renderjson/-/renderjson-1.4.0.tgz"
+  "version" "1.4.0"
 
 "renderkid@^2.0.4":
   "integrity" "sha512-oCcFyxaMrKsKcTY59qnCAtmDVSLfPbrv6A3tVbPdFMMrv5jaK10V6m40cKsoPNhAqN6rmHW9sswW4o3ruSrwUQ=="

@@ -11,7 +11,6 @@ function TryIt(){
     const dispatch = useDispatch();
 
     useEffect(()=> {
-        // localStorage.setItem('bte-jobs-main-site', JSON.stringify([]))
         console.log('%c Checking jobs...', 'color: limegreen')
         let jobs = JSON.parse(localStorage.getItem('bte-jobs-main-site'));
         if (jobs && jobs.length) {
@@ -27,7 +26,7 @@ function TryIt(){
     let jobs = useSelector(state => state.main.jobs);
     let selectedQuery = useSelector(state => state.main.selectedQuery);
 
-    const [jobURL, setJobURL] = useState('');
+    const [jobID, setJobID] = useState('');
 
     function deleteAllJobs(){
         dispatch(deleteJobs());
@@ -80,19 +79,22 @@ function TryIt(){
                                     <div className="d-flex justify-center items-center">
                                         <div>
                                             <label className="text-white">Choose a job ID</label>
-                                            <select style={{padding: 10, margin: 20, borderRadius: 5}} onChange={e => setJobURL(e.target.value)} name="jobs" id="job-select">
+                                            <select style={{padding: 10, margin: 20, borderRadius: 5}} onChange={e => setJobID(e.target.value)} name="jobs" id="job-select">
                                                 <option value="">Choose one</option>
                                                 {jobs.map((job) => {
-                                                    return <option value={job.url} key={job.id}>
+                                                    return <option value={job.id} key={job.id}>
                                                         { job.id } {job?.description ? `- (${job?.description}) -` : ' - '} { job.date }
                                                     </option>
                                                 })}
                                             </select>
                                         </div>
                                         {jobs?.length  === 0 && <p className="text-center text-yellow"> No jobs have been created yet.</p>}
-                                        {jobURL && <a data-tippy-content="Your results will open on a new window" target="_blank" href={jobURL} rel="noopener noreferrer" style={{margin: 10}}>
+                                        {/* {jobID && <a data-tippy-content="Your results will open on a new window" target="_blank" href={jobID} rel="noopener noreferrer" style={{margin: 10}}>
                                             <Button color="green">Check Results&nbsp; <i aria-hidden="true" className="share square icon"></i></Button>
-                                        </a>}
+                                        </a>} */}
+                                        {jobID && <Link className='text-white' style={{margin: 10}} to={'/view/' + jobID}>
+                                            <Button color="green">View Results</Button>
+                                        </Link>}
                                         {jobs?.length  > 0 && <Button style={{marginLeft: 90}} inverted color="red" onClick={deleteAllJobs}>
                                             Delete All Jobs
                                         </Button>}
