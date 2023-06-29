@@ -14,6 +14,7 @@ import { Header } from './components/Header';
 import Footer from './components/Footer';
 import {delegate} from 'tippy.js';
 import 'tippy.js/themes/light.css';
+import 'jsoneditor/dist/jsoneditor.min.css';
 
 delegate('#root', {
   target: '[data-tippy-content]',
