@@ -46,6 +46,17 @@ h1{
     overflow-y: scroll;
 }
 
+/* JSON viewer */
+
+.jsoneditor{
+    border: 1px solid #F15A24 !important;
+}
+
+.jsoneditor-menu{
+    background-color: #F15A24 !important;
+    border-bottom: 1px solid #F15A24 !important;
+}
+
 /* dropdown overrides */
 
 .ui.menu .ui.dropdown .menu>.item{

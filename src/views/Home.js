@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Image, Grid, Container, Icon } from 'semantic-ui-react'
+import { Button, Image, Grid, Container } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 import AnimatedLogo from '../components/AnimatedLogo';
 import logo from '../assets/biothings-explorer-text.svg';
