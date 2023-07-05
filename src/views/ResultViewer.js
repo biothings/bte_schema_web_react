@@ -28,6 +28,11 @@ function ResultViewer(){
 
     function getJob(jobURL, download=false){
         setMSG(true);
+        // check protocol
+        let prot = new URL(jobURL).protocol
+        if (window.location.protocol !== prot) {
+            jobURL = jobURL.replace(prot, window.location.protocol)
+        }
         axios.get(jobURL).then((res) => {
             const data = res.data;
             if (download) {
