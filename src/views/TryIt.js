@@ -89,11 +89,8 @@ function TryIt(){
                                             </select>
                                         </div>
                                         {jobs?.length  === 0 && <p className="text-center text-yellow"> No jobs have been created yet.</p>}
-                                        {/* {jobID && <a data-tippy-content="Your results will open on a new window" target="_blank" href={jobID} rel="noopener noreferrer" style={{margin: 10}}>
-                                            <Button color="green">Check Results&nbsp; <i aria-hidden="true" className="share square icon"></i></Button>
-                                        </a>} */}
                                         {jobID && <Link className='text-white' style={{margin: 10}} to={'/view/' + jobID}>
-                                            <Button color="green">View Results</Button>
+                                            <Button color="green">Continue To View Results</Button>
                                         </Link>}
                                         {jobs?.length  > 0 && <Button style={{marginLeft: 90}} inverted color="red" onClick={deleteAllJobs}>
                                             Delete All Jobs
