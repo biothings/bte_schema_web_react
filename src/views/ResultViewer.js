@@ -7,7 +7,7 @@ import JSONEditor from 'jsoneditor'
 function ResultViewer(){
     const { id } = useParams();
     const [job, setJob] = useState({});
-    const [msg, setMSG] = useState(false);
+    const [msg, hideMSG] = useState(false);
 
     function downloadResponse(data) {
         var a = document.createElement("a");
@@ -27,7 +27,7 @@ function ResultViewer(){
     }
 
     function getJob(jobURL, download=false){
-        setMSG(true);
+        hideMSG(true);
         // check protocol
         let prot = new URL(jobURL).protocol
         if (window.location.protocol !== prot) {
@@ -40,19 +40,28 @@ function ResultViewer(){
             }else{
                 const container = document.getElementById("res");
                 const options = {
-                    mode: "view"
+                    'mode': "view",
                 };
                 const editor = new JSONEditor(container, options);
                 editor.set(data);
-                // TODO: Not working - expand selected fields, open issue.
-                // editor.expand({ path: ['returnvalue', 'response', 'message', 'knowledge_graph'] })
-                // editor.expand({ path: ['returnvalue', 'response', 'message', 'results'] })
+                function expandPath(path) {
+                    for (let i = 0; i < path.length; i++) {
+                        const parentPath = path.slice(0, i)
+                        editor.expand({ 
+                            'path': parentPath, 
+                            'isExpand': ['knowledge_graph', 'results'].includes(path) ? false : true, 
+                            'recursive': false
+                        });
+                    }
+                }
+                expandPath(['returnvalue', 'response', 'message', 'knowledge_graph']);
+                expandPath(['returnvalue', 'response', 'message', 'results']);
             }
-            setTimeout(() => setMSG(false), 5000);
+            setTimeout(() => hideMSG(false), 5000);
         }).catch((err) => {
             console.log('%c Job retrieval error:', 'color: red')
             console.log(err)
-            setTimeout(() => setMSG(false), 5000);
+            setTimeout(() => hideMSG(false), 5000);
         })
     }
 
