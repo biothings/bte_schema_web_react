@@ -49,12 +49,12 @@ h1{
 /* JSON viewer */
 
 .jsoneditor{
-    border: 1px solid #F15A24 !important;
+    border: 1px solid #b7ea68 !important;
 }
 
 .jsoneditor-menu{
-    background-color: #F15A24 !important;
-    border-bottom: 1px solid #F15A24 !important;
+    background-color: #b7ea68 !important;
+    border-bottom: 1px solid #b7ea68 !important;
 }
 
 /* dropdown overrides */
