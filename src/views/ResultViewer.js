@@ -66,7 +66,7 @@ function ResultViewer(){
             setJobState(data?.status);
             if (download) {
                 downloadResponse(data);
-            }else if(data?.status === 'completed'){
+            }else if(data?.status === 'Completed'){
                 openEditor(data);
             }
             setTimeout(() => showMSG(false), 5000);
@@ -86,7 +86,7 @@ function ResultViewer(){
                 getJob(found.url, false)
             }else{
                 showMSG(true);
-                setJobState('error');
+                setJobState('Error');
                 setTimeout(() => showMSG(false), 5000);
             }
         }else{
@@ -98,22 +98,22 @@ function ResultViewer(){
         <Container color="black">
             <div style={{display:'flex', alignItems: 'center'}}>
                 <div>
-                    {jobState === 'completed' && <img 
+                    {jobState === 'Completed' && <img 
                     data-tippy-content="The return value's <code>response</code> field holds BTE's response, which follows the Translator consortium's <a target='_blank' rel='noopener noreferrer' href='https://github.com/NCATSTranslator/ReasonerAPI'>TRAPI standards</a>. The answers are in the results section and are represented as graphs that fill in the info we'd like to know in the query." 
                     src={complete} 
                     alt="Job Complete" 
                     width="80"/>}
-                    {jobState === 'active' && <img 
+                    {jobState === 'Active' && <img 
                     data-tippy-content="BTE is currently working on your request! Your results should be ready soon 🎉" 
                     src={active} 
                     alt="Job Active" 
                     width="80"/>}
-                    {jobState === 'queued' && <img 
+                    {jobState === 'Queued' && <img 
                     data-tippy-content="BTE is experiencing a large number of requests at this time but your job will still be processed as soon as there's bandwidth to process it" 
                     src={queued} 
                     alt="Job Queued" 
                     width="80"/>}
-                    {jobState === 'error' && <img 
+                    {jobState === 'Error' && <img 
                     data-tippy-content="There seems to be an issue with this job ID, if you feel this is not normal please contact us!" 
                     src={errorimg} 
                     alt="Job Error" 
