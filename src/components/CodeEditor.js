@@ -36,9 +36,9 @@ function CodeEditor(props) {
                 dispatch(setLoading(false))
             }, 1000);
             let job = {
-                'id': res.data.id,
+                'id': res.data.job_id,
                 'date': getDateRightNow(),
-                'url': res.data.url,
+                'url': res.data.job_url,
                 'description': payload.description
             };
             dispatch(addJob(job))
