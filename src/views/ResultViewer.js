@@ -63,10 +63,10 @@ function ResultViewer(){
         }
         axios.get(jobURL).then((res) => {
             const data = res.data;
-            setJobState(data?.state);
+            setJobState(data?.status);
             if (download) {
                 downloadResponse(data);
-            }else if(data?.state === 'completed'){
+            }else if(data?.status === 'completed'){
                 openEditor(data);
             }
             setTimeout(() => showMSG(false), 5000);
