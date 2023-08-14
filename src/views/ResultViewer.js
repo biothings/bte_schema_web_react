@@ -127,10 +127,10 @@ function ResultViewer(){
                     {job?.url && <Button style={{margin: 10}} size="tiny" onClick={()=>getJob(job?.url, true)} color="blue">Download JSON response</Button>}
                 </div>
             </div>
-            {jobState === 'completed' && <div style={{'maxHeight': '1000px', 'overflowY': 'scroll', 'marginBottom': '100px'}}>
+            {jobState === 'Completed' && <div style={{'maxHeight': '1000px', 'overflowY': 'scroll', 'marginBottom': '100px'}}>
                 <div id="res" style={{margin: 0, height:'800px'}}></div>
             </div>}
-            {jobState === 'active' && <Message
+            {jobState === 'Active' && <Message
             color="blue" style={{height: '400px', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <div style={{textAlign: 'center'}}>
                     <img 
@@ -141,7 +141,7 @@ function ResultViewer(){
                     <h2>We are working on your request. <b style={{cursor: 'pointer', color: '#4a3fc9', textDecoration: 'underline'}} onClick={()=>{window.location.reload()}}>Refresh this page</b> to check again.</h2>
                 </div>
             </Message>}
-            {jobState === 'queued' && <Message
+            {jobState === 'Queued' && <Message
             color="purple" style={{height: '400px', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <div style={{textAlign: 'center'}}>
                     <img 
@@ -152,7 +152,7 @@ function ResultViewer(){
                     <h2>We are experiencing heavy traffic but your job is in the queue.  <b style={{cursor: 'pointer', color: '#4a3fc9', textDecoration: 'underline'}} onClick={()=>{window.location.reload()}}>Refresh this page</b> to check again. </h2>
                 </div>
             </Message>}
-            {jobState === 'error' && <Message
+            {jobState === 'Error' && <Message
             color="red" style={{height: '400px', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <div style={{textAlign: 'center'}}>
                     <img 
