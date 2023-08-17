@@ -18,13 +18,7 @@ function ResultViewer(){
     function downloadResponse(data) {
         var a = document.createElement("a");
         var file = new Blob(
-          [
-            "<sc" +
-              'ript type="application/ld+json" >' +
-              JSON.stringify(data, null, 2) +
-              "</scr" +
-              "ipt>",
-          ],
+          [JSON.stringify(data, null, 2)],
           { type: "application/json" }
         );
         a.href = URL.createObjectURL(file);
@@ -49,12 +43,28 @@ function ResultViewer(){
                 });
             }
         }
-        expandPath(['returnvalue', 'response', 'message', 'knowledge_graph']);
-        expandPath(['returnvalue', 'response', 'message', 'results']);
+        expandPath(['message', 'knowledge_graph']);
+        expandPath(['message', 'results']);
         console.log('Editor Loaded')
     }
 
-    function getJob(jobURL, download=false){
+    function getResponse(jobURL, download=false){
+        axios.get(jobURL).then((res) => {
+            const data = res.data;
+            if(download){
+                downloadResponse(data);
+            }else{
+                openEditor(data);
+            }
+            setTimeout(() => showMSG(false), 5000);
+        }).catch((err) => {
+            openEditor(err)
+            setJobState('Error');
+            setTimeout(() => showMSG(false), 5000);
+        })
+    }
+
+    function checkStatus(jobURL, download=false){
         showMSG(true);
         // check protocol
         let prot = new URL(jobURL).protocol
@@ -64,15 +74,15 @@ function ResultViewer(){
         axios.get(jobURL).then((res) => {
             const data = res.data;
             setJobState(data?.status);
-            if (download) {
-                downloadResponse(data);
-            }else if(data?.status === 'Completed'){
-                openEditor(data);
+            if(data?.status === 'Completed'){
+                if (data?.response_url) {
+                    getResponse(data?.response_url, download);
+                }
             }
             setTimeout(() => showMSG(false), 5000);
         }).catch((err) => {
             openEditor(err)
-            setJobState('error');
+            setJobState('Error');
             setTimeout(() => showMSG(false), 5000);
         })
     }
@@ -83,7 +93,7 @@ function ResultViewer(){
             let found = jobs.find(j => j.id === id);
             if (found){
                 setJob(found)
-                getJob(found.url, false)
+                checkStatus(found.url, false)
             }else{
                 showMSG(true);
                 setJobState('Error');
@@ -121,10 +131,10 @@ function ResultViewer(){
                 </div>
                 <div>
                     {msg && <Message compact size="tiny" color={job?.id ? 'green' : 'red'} >{job?.id ? 'Viewing results for job ID: ' + job.id : 'This job ID does not exist: ' + id}</Message>}
-                    <p>When your job is complete, the results below will be in <a data-tippy-content="Learn more about TRAPI format" href="https://github.com/NCATSTranslator/ReasonerAPI" target="_blank" rel="nonopenner">TRAPI format</a>, with relevant information returned in the <code>returnvalue.response.message.knowledge_graph</code> and <code>returnvalue.response.message.results</code> sections.</p>
+                    <p>When your job is complete, the results below will be in <a data-tippy-content="Learn more about TRAPI format" href="https://github.com/NCATSTranslator/ReasonerAPI" target="_blank" rel="nonopenner">TRAPI format</a>, with relevant information returned in the <code>message.knowledge_graph</code> and <code>message.results</code> sections.</p>
                 </div>
                 <div>
-                    {job?.url && <Button style={{margin: 10}} size="tiny" onClick={()=>getJob(job?.url, true)} color="blue">Download JSON response</Button>}
+                    {job?.url && <Button style={{margin: 10}} size="tiny" onClick={()=>checkStatus(job?.url, true)} color="blue">Download JSON response</Button>}
                 </div>
             </div>
             {jobState === 'Completed' && <div style={{'maxHeight': '1000px', 'overflowY': 'scroll', 'marginBottom': '100px'}}>
