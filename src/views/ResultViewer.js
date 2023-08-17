@@ -49,6 +49,11 @@ function ResultViewer(){
     }
 
     function getResponse(jobURL, download=false){
+        // check protocol
+        let prot = new URL(jobURL).protocol
+        if (window.location.protocol !== prot) {
+            jobURL = jobURL.replace(prot, window.location.protocol)
+        }
         axios.get(jobURL).then((res) => {
             const data = res.data;
             if(download){
@@ -113,10 +118,10 @@ function ResultViewer(){
                     src={complete} 
                     alt="Job Complete" 
                     width="80"/>}
-                    {jobState === 'Active' && <img 
+                    {jobState === 'Running' && <img 
                     data-tippy-content="BTE is currently working on your request! Your results should be ready soon 🎉" 
                     src={active} 
-                    alt="Job Active" 
+                    alt="Job Running" 
                     width="80"/>}
                     {jobState === 'Queued' && <img 
                     data-tippy-content="BTE is experiencing a large number of requests at this time but your job will still be processed as soon as there's bandwidth to process it" 
@@ -140,13 +145,13 @@ function ResultViewer(){
             {jobState === 'Completed' && <div style={{'maxHeight': '1000px', 'overflowY': 'scroll', 'marginBottom': '100px'}}>
                 <div id="res" style={{margin: 0, height:'800px'}}></div>
             </div>}
-            {jobState === 'Active' && <Message
+            {jobState === 'Running' && <Message
             color="blue" style={{height: '400px', display:'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <div style={{textAlign: 'center'}}>
                     <img 
                         data-tippy-content="BTE is currently working on your request! Your results should be ready soon 🎉" 
                         src={active} 
-                        alt="Job Active" 
+                        alt="Job Running" 
                         width="200"/>
                     <h2>We are working on your request. <b style={{cursor: 'pointer', color: '#4a3fc9', textDecoration: 'underline'}} onClick={()=>{window.location.reload()}}>Refresh this page</b> to check again.</h2>
                 </div>
