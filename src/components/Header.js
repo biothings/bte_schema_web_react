@@ -28,6 +28,15 @@ export function Header() {
                     >
                     About
                 </Menu.Item>
+                <Menu.Item
+                    name='SOURCES'
+                    as={Link}
+                    to='/sources'
+                    active={clicked === 'SOURCES'}
+                    onClick={()=>{setClicked('SOURCES')}}
+                    >
+                    Sources
+                </Menu.Item>
                 {/* <Menu.Item
                     name='QUERY'
                     as={Link}

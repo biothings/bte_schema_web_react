@@ -9,6 +9,7 @@ import UsagePage from './views/Usage';
 import TryIt from './views/TryIt';
 import ResultViewer from './views/ResultViewer';
 import RefPage from './views/Reference';
+import Sources from './views/Sources';
 import AdvancedQuery from './components/advanced/AdvancedQueryComponent';
 import { Header } from './components/Header';
 import Footer from './components/Footer';
@@ -39,6 +40,7 @@ class App extends Component {
             <Route path="/usage" element={<UsagePage />} />
             <Route path="/reference" element={<RefPage />} />
             <Route path="/query" element={<AdvancedQuery />} />
+            <Route path="/sources" element={<Sources />} />
           </Routes> 
         <Footer/>
       </BrowserRouter>
