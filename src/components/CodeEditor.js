@@ -42,7 +42,7 @@ function CodeEditor(props) {
                 'description': payload.description
             };
             dispatch(addJob(job))
-            dispatch(setMessage(`A new job ID has been created: ${res.data.id} `))
+            dispatch(setMessage(`A new job ID has been created: ${res.data.job_id} `))
             setTimeout(() => {
                 dispatch(setMessage(''))
             }, 10000);
