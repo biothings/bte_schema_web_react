@@ -20,7 +20,7 @@ function RefPage(){
     return <div className="text-left min-h-100">
         <Container color="gray">
             <h1 className="d-flex items-center"><img src={install} width="50" alt="install"/>  Useful variable references when using BioThings Explorer</h1>
-            <div id="md"></div>
+            <div id="md" className="mb-4"></div>
         </Container>
     </div>
 }
