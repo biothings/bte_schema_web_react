@@ -43,11 +43,11 @@ const Home = () => (
         </Grid.Column>
         <Grid.Column color="yellow">
           <Image src={read} width="100" className="m-auto"/>
-            <a href='https://arxiv.org/abs/2304.09344'
+            <a href='https://academic.oup.com/bioinformatics/article/39/9/btad570/7273783'
             rel="noopener noreferrer"
             style={{color: '#3a4892'}}
             target="_blank">
-              <h3>Read the preprint <i aria-hidden="true" className="share square icon"></i></h3>
+              <h3>Read the paper <i aria-hidden="true" className="share square icon"></i></h3>
             </a>
         </Grid.Column>
         <Grid.Column color="purple">
